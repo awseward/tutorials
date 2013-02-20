@@ -1,6 +1,7 @@
 #include "dot.h"
 #include <string>
 #include <ctime>
+#include <sys/time.h>
 #include <sstream>
 
 const int DEFAULT_SIZE = 50;
@@ -66,8 +67,11 @@ std::string Dot::get_name() {
   return name;
 }
 int Dot::pseudo_timestamp() {
-  time_t t;
-  return (time(&t) % 10000);
+  //time_t t;
+  //return (time(&t) % 10000);
+  timeval time;
+  gettimeofday(&time, NULL);
+  return (time.tv_usec);
 }
 int Dot::get_x() {
   return x;
